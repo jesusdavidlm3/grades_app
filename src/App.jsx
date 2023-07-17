@@ -1,33 +1,102 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Button, Typography, Box, Input, TextField } from '@mui/material'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const [corte, setCorte] = useState ("")   //constante utilizada para definir el
+                                            //corte segun botones
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Box
+        sx = {{ justifyContent: 'center', textAlign: 'center' }}
+      >
+        <Typography
+          variant = 'h3'
+          component = 'h1'
+        >
+          ¿Cuantos cortes has culminado?
+        </Typography> 
+ 
+        <Button
+          sx = {{ m: 2 }}                         //Establecemos estilos para el boton
+          variant = 'contained'
+          // onClick = { () => { alert('pulsado 1') } }
+          onClick = { () => {setCorte("1")} }     //Establecemos un valor para es estado corte
+        >
+          1 corte
+        </Button>
+        
+        <Button
+          sx = {{ m: 2 }}
+          variant = 'contained'
+          // onClick = { () => { alert('pulsado 2') } }
+          onClick = { () => {setCorte("2")} }
+        >
+          2 cortes
+        </Button>
+        
+        <Button
+          sx = {{ m: 2 }}
+          variant = 'contained'
+          // onClick={ () => { alert('pulsado 3') } }
+          onClick = { () => {setCorte("3")} }
+        >
+          3 cortes
+        </Button>
+
+      </Box>
+
+      <Box
+        sx = {{ justifyContent: 'center', textAlign: 'center' }}
+      >
+  
+        { corte == 1 &&               //Renderizado condicional
+          <form>
+              <label>Por favor ingresa la nota de tu primer corte</label><br></br>
+              <TextField /><br></br>
+              
+              <Button
+                type='submit'
+                variant='contained'
+              >Calcular</Button>
+          </form>
+        }
+
+        { corte == 2 && 
+          <form>
+              <label>Por favor ingresa la nota de tu primer corte</label><br></br>
+              <TextField /><br></br>
+
+              <label>Por favor ingresa la nota de tu segundo corte</label><br></br>
+              <TextField /><br></br>
+
+              <Button
+                type='submit'
+                variant='contained'
+              >Calcular</Button>
+          </form>
+        }
+
+        { corte == 3 && 
+          <form>
+              <label>Por favor ingresa la nota de tu primer corte</label><br></br>
+              <TextField /><br></br>
+
+              <label>Por favor ingresa la nota de tu segundo corte</label><br></br>
+              <TextField /><br></br>
+
+              <label>Por favor ingresa la nota de tu tercer corte</label><br></br>
+              <TextField /><br></br>
+
+              <Button
+                type='submit'
+                variant='contained'
+              >Calcular</Button>
+          </form>
+        }
+
+      </Box>
     </>
   )
 }
