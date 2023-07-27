@@ -4,7 +4,7 @@ import './App.css'
 
 function App() {
 
-  const [corte, setCorte] = useState ("")
+  const [corte, setCorte] = useState (0)
   const [result, setResult] = useState ("")
 
   const [not1, setNot1] = useState(0)
@@ -35,7 +35,7 @@ function App() {
     setNot1(0)
     setNot2(0)
     setNot3(0)
-    setCorte('3')
+    setCorte(3)
   }
 
   function calcular1(){
@@ -57,7 +57,9 @@ function App() {
 
   return (
     <>
-      <Box>
+      <Box 
+        textAlign={'center'}
+      >
         <Typography
           variant = 'h3'
           component = 'h1'
@@ -68,7 +70,7 @@ function App() {
         <Button
           sx = {{ m: 2 }}
           variant = 'contained'
-          onClick = { () => mostrar1corte() }
+          onClick={() => { mostrar1corte() }}
         >
           1 corte
         </Button>
@@ -76,7 +78,7 @@ function App() {
         <Button
           sx = {{ m: 2 }}
           variant = 'contained'
-          onClick = { () => mostrar2cortes() } 
+          onClick = {() => { mostrar2cortes() }} 
         >
           2 cortes
         </Button>
@@ -84,7 +86,7 @@ function App() {
         <Button
           sx = {{ m: 2 }}
           variant = 'contained'
-          onClick = { () => mostrar3cortes() }
+          onClick = {() => { mostrar3cortes() }}
         >
           3 cortes
         </Button>
@@ -92,13 +94,13 @@ function App() {
     </>
   )
 
-{ corte == '1' &&
+{ corte == 1 &&
   <>
     <form>
       <TextField 
         type='number'
         label='Nota del primer corte'
-        sx={{ m: 1, }}
+        sx={{ m: 1 }}
         size='small'
         onChange={ (e) => {setNot1(parseInt(e.target.value))} }
       />
@@ -207,7 +209,6 @@ function App() {
 { result == "1" &&
   <>
     <Box> 
-      Su nota restante es {{ notaRestante }}
     </Box>
   </>  
 }
