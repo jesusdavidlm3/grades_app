@@ -4,12 +4,61 @@ import './App.css'
 
 function App() {
 
-  const [corte, setCorte] = useState ("")   //constante utilizada para definir el
-                                            //corte segun botones
+  const [corte, setCorte] = useState (0)
+  const [result, setResult] = useState ("")
+
+  const [not1, setNot1] = useState(0)
+  const [not2, setNot2] = useState(0)
+  const [not3, setNot3] = useState(0)
+
+  const [restante2, setRestante2] = useState(0)
+  const [restante3, setRestante3] = useState(0)
+
+  const [notaFinal, setNotaFinal] = useState(0)
+  const [aprobado, setAprobado] = useState(false)
+
+  function mostrar1corte(){
+    setNot1(0)
+    setNot2(0)
+    setNot3(0)
+    setCorte('1')
+  }
+
+  function mostrar2cortes(){
+    setNot1(0)
+    setNot2(0)
+    setNot3(0)
+    setCorte('2')
+  }
+
+  function mostrar3cortes(){
+    setNot1(0)
+    setNot2(0)
+    setNot3(0)
+    setCorte('3')
+  }
+
+  function calcular1(){
+    setResult('1')
+  }
+
+  function calcular2(){
+    setResult('2')
+    setRestante3(9.6 - (0.3 * not1) + (0.3 * not2))
+  }
+
+  function calcular3(){
+    setResult('3')
+    setNotaFinal((not1*0.3)+(not2*0.3)+(not3*0.4))
+    if(notaFinal > 9.6){
+      setAprobado(true)
+    }
+  }
+
   return (
     <>
-      <Box
-        sx = {{ justifyContent: 'center', textAlign: 'center' }}
+      <Box 
+        textAlign={'center'}
       >
         <Typography
           variant = 'h3'
@@ -17,12 +66,11 @@ function App() {
         >
           ¿Cuantos cortes has culminado?
         </Typography> 
- 
+
         <Button
-          sx = {{ m: 2 }}                         //Establecemos estilos para el boton
+          sx = {{ m: 2 }}
           variant = 'contained'
-          // onClick = { () => { alert('pulsado 1') } }
-          onClick = { () => {setCorte("1")} }     //Establecemos un valor para es estado corte
+          onClick={ () => { mostrar1corte() } }
         >
           1 corte
         </Button>
@@ -30,75 +78,134 @@ function App() {
         <Button
           sx = {{ m: 2 }}
           variant = 'contained'
-          // onClick = { () => { alert('pulsado 2') } }
-          onClick = { () => {setCorte("2")} }
+          onClick = {() => { mostrar2cortes() }} 
         >
           2 cortes
         </Button>
-        
+          
         <Button
           sx = {{ m: 2 }}
           variant = 'contained'
-          // onClick={ () => { alert('pulsado 3') } }
-          onClick = { () => {setCorte("3")} }
+          onClick = {() => { mostrar3cortes() }}
         >
           3 cortes
         </Button>
-
       </Box>
 
       <Box
-        sx = {{ justifyContent: 'center', textAlign: 'center' }}
+        textAlign={'center'}
       >
-  
-        { corte == 1 &&               //Renderizado condicional
+        { corte == 1 && 
           <form>
-              <label>Por favor ingresa la nota de tu primer corte</label><br></br>
-              <TextField /><br></br>
-              
-              <Button
-                type='submit'
-                variant='contained'
-              >Calcular</Button>
+          <TextField
+            type='number'
+            label='nota del primer corte'
+            sx={{ m: 1 }}
+            size='small'
+            onChange={ (e) => { setNot1(parseInt(e.target.value)) } }
+          />
+
+          <br></br>
+
+          <Button
+            sx={{ m: 1 }}
+            variant='contained'
+            onClick={ (e) => { calcular1() } }
+          >
+            Calcular
+          </Button>
+
           </form>
         }
 
         { corte == 2 && 
           <form>
-              <label>Por favor ingresa la nota de tu primer corte</label><br></br>
-              <TextField /><br></br>
+            <TextField 
+              type='number'
+              label='Nota del primer corte'
+              sx={{ m: 1 }}
+              size='small'
+              onChange={ (e) => {setNot1(parseInt(e.target.value))} }
+            />
 
-              <label>Por favor ingresa la nota de tu segundo corte</label><br></br>
-              <TextField /><br></br>
+            <br></br>
 
-              <Button
-                type='submit'
-                variant='contained'
-              >Calcular</Button>
+            <TextField
+              type='number'
+              label='Nota del segundo corte'
+              sx={{ m: 1 }}
+              size='small'
+              onChange={ (e) => {setNot1(parseInt(e.target.value))} }
+            />
+
+            <br></br>
+
+            <Button
+              sx = {{ m: 2 }}
+              variant='contained'
+              onClick={() => { calcular2() }}
+            >
+              Calcular
+            </Button>
           </form>
         }
 
         { corte == 3 && 
           <form>
-              <label>Por favor ingresa la nota de tu primer corte</label><br></br>
-              <TextField /><br></br>
+            <TextField
+              name='corte1'
+              type='number'
+              label='Nota del primer corte'
+              sx={{ m: 1 }}
+              size='small'
+              onChange={(e) => setNot1(parseInt(e.target.value))}
+            />
 
-              <label>Por favor ingresa la nota de tu segundo corte</label><br></br>
-              <TextField /><br></br>
+            <br></br>
 
-              <label>Por favor ingresa la nota de tu tercer corte</label><br></br>
-              <TextField /><br></br>
+            <TextField
+              name='corte2'
+              type='number'
+              label='Nota del segundo corte'
+              sx={{ m: 1 }}
+              size='small'
+              onChange={(e) => setNot2(parseInt(e.target.value))}
+            />
 
-              <Button
-                type='submit'
-                variant='contained'
-              >Calcular</Button>
+            <br></br>
+
+            <TextField 
+              name='corte3'
+              type='number'
+              label='Nota del tercer corte'
+              sx={{ m: 1 }}
+              size='small'
+              onChange={(e) => setNot3(parseInt(e.target.value))}
+            />
+
+            <br></br>
+
+            <Button
+              sx={{ m: 2 }}
+              variant='contained'
+              onClick={() => { calcular3() }}
+            >
+              Calcular
+            </Button>
+
+            <Typography>
+            Tu nota en el primer corte es {not1}<br></br>
+            Tu nota en el Segundo corte es {not2}<br></br>
+            Tu nota en el tercer corte es {not3}<br></br>
+            </Typography>
           </form>
         }
-
       </Box>
     </>
-  )
-}
 
+  )
+
+
+
+}
 export default App
