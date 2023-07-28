@@ -4,7 +4,7 @@ import './App.css'
 
 function App() {
 
-  const [corte, setCorte] = useState (0)
+  const [corte, setCorte] = useState ('')
   const [result, setResult] = useState ("")
 
   const [not1, setNot1] = useState(0)
@@ -22,6 +22,11 @@ function App() {
     setNot2(0)
     setNot3(0)
     setCorte('1')
+    setResult('')
+    setAprobado(false)
+    if(corte == '1'){
+      setCorte('')
+    }
   }
 
   function mostrar2cortes(){
@@ -29,6 +34,11 @@ function App() {
     setNot2(0)
     setNot3(0)
     setCorte('2')
+    setResult('')
+    setAprobado(false)
+    if(corte == '2'){
+      setCorte('')
+    }
   }
 
   function mostrar3cortes(){
@@ -36,6 +46,11 @@ function App() {
     setNot2(0)
     setNot3(0)
     setCorte('3')
+    setResult('')
+    setAprobado(false)
+    if(corte == '3'){
+      setCorte('')
+    }
   }
 
   function calcular1(){
@@ -110,7 +125,7 @@ function App() {
           <Button
             sx={{ m: 1 }}
             variant='contained'
-            onClick={ (e) => { calcular1() } }
+            onClick={ () => { calcular1() } }
           >
             Calcular
           </Button>
@@ -135,7 +150,7 @@ function App() {
               label='Nota del segundo corte'
               sx={{ m: 1 }}
               size='small'
-              onChange={ (e) => {setNot1(parseInt(e.target.value))} }
+              onChange={ (e) => {setNot2(parseInt(e.target.value))} }
             />
 
             <br></br>
@@ -147,6 +162,7 @@ function App() {
             >
               Calcular
             </Button>
+
           </form>
         }
 
@@ -201,6 +217,27 @@ function App() {
           </form>
         }
       </Box>
+
+      <Box textAlign={ 'center' } >
+        { result == '2' && 
+          <Typography>
+            Tu nota restante para el tercer corte es de { restante3 }
+          </Typography>
+        }
+
+        { result == '3' && aprobado == true && 
+          <Typography>
+            Felicitaciones, aprobaste la materia con una nota final de { notaFinal }
+          </Typography>
+        }
+
+        { result == '3' && aprobado == false && 
+          <Typography>
+            Lo sentimos, { notaFinal } no es una nota suficiente para aprobar
+          </Typography>
+        }
+      </Box>
+
     </>
 
   )
