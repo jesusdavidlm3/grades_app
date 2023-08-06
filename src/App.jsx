@@ -59,15 +59,12 @@ function App() {
 
   function calcular2(){
     setResult('2')
-    setRestante3(9.6 - (0.3 * not1) + (0.3 * not2))
+    setRestante3( (9.6 - ( not1*0.3 + not2*0.3)) / 0.4 )
   }
 
   function calcular3(){
     setResult('3')
     setNotaFinal((not1*0.3)+(not2*0.3)+(not3*0.4))
-    if(notaFinal > 9.6){
-      setAprobado(true)
-    }
   }
 
   return (
@@ -117,7 +114,7 @@ function App() {
             label='nota del primer corte'
             sx={{ m: 1 }}
             size='small'
-            onChange={ (e) => { setNot1(parseInt(e.target.value)) } }
+            onChange={ (e) => { setNot1(parseFloat(e.target.value)) } }
           />
 
           <br></br>
@@ -140,7 +137,7 @@ function App() {
               label='Nota del primer corte'
               sx={{ m: 1 }}
               size='small'
-              onChange={ (e) => {setNot1(parseInt(e.target.value))} }
+              onChange={ (e) => {setNot1(parseFloat(e.target.value))} }
             />
 
             <br></br>
@@ -150,7 +147,7 @@ function App() {
               label='Nota del segundo corte'
               sx={{ m: 1 }}
               size='small'
-              onChange={ (e) => {setNot2(parseInt(e.target.value))} }
+              onChange={ (e) => {setNot2(parseFloat(e.target.value))} }
             />
 
             <br></br>
@@ -174,7 +171,7 @@ function App() {
               label='Nota del primer corte'
               sx={{ m: 1 }}
               size='small'
-              onChange={(e) => setNot1(parseInt(e.target.value))}
+              onChange={(e) => setNot1(parseFloat(e.target.value))}
             />
 
             <br></br>
@@ -185,7 +182,7 @@ function App() {
               label='Nota del segundo corte'
               sx={{ m: 1 }}
               size='small'
-              onChange={(e) => setNot2(parseInt(e.target.value))}
+              onChange={(e) => setNot2(parseFloat(e.target.value))}
             />
 
             <br></br>
@@ -196,7 +193,7 @@ function App() {
               label='Nota del tercer corte'
               sx={{ m: 1 }}
               size='small'
-              onChange={(e) => setNot3(parseInt(e.target.value))}
+              onChange={(e) => setNot3(parseFloat(e.target.value))}
             />
 
             <br></br>
@@ -219,19 +216,33 @@ function App() {
       </Box>
 
       <Box textAlign={ 'center' } >
-        { result == '2' && 
+        { result == '1' && 
           <Typography>
-            Tu nota restante para el tercer corte es de { restante3 }
+            Tu nota restante para el corte 2 es de { restante2 }<br></br>
+            y para el corte 3 es de { restante3 }
+          </Typography>
+        }
+        
+        { result == '2' && restante3 > 9.6 &&
+          <Typography>
+            Tu nota restante para el tercer corte es de { restante3 } <br></br>
           </Typography>
         }
 
-        { result == '3' && aprobado == true && 
+        { result == '2' && restante3 < 9.6 && 
+          <Typography>
+            Tu nota restante para el tercer corte es de { 9.6 - restante3 } <br></br>
+            ya has acumulado nota suficiente para aprobar
+          </Typography>
+        }
+
+        { result == '3' && notaFinal > 9.6 && 
           <Typography>
             Felicitaciones, aprobaste la materia con una nota final de { notaFinal }
           </Typography>
         }
 
-        { result == '3' && aprobado == false && 
+        { result == '3' && notaFinal < 9.6 && 
           <Typography>
             Lo sentimos, { notaFinal } no es una nota suficiente para aprobar
           </Typography>
