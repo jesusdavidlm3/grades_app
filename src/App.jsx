@@ -55,6 +55,8 @@ function App() {
 
   function calcular1(){
     setResult('1')
+    setRestante2( (9.6-(not1*0.3))/0.3 )
+    setRestante3( (9.6-(not1*0.3))/0.4 )
   }
 
   function calcular2(){
