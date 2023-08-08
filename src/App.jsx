@@ -55,13 +55,13 @@ function App() {
 
   function calcular1(){
     setResult('1')
-    setRestante2( (9.6-(not1*0.3))/0.3 )
-    setRestante3( (9.6-(not1*0.3))/0.4 )
+    setRestante2( (9.6-(not1*0.3))/0.43 )
+    setRestante3( (9.6-(not1*0.3))/0.57 )
   }
 
   function calcular2(){
     setResult('2')
-    setRestante3( (9.6 - ( not1*0.3 + not2*0.3)) / 0.4 )
+    setRestante3( (9.6 - ( not1*0.3 + not2*0.3)) )
   }
 
   function calcular3(){
@@ -220,33 +220,33 @@ function App() {
       <Box textAlign={ 'center' } >
         { result == '1' && 
           <Typography>
-            Tu nota restante para el corte 2 es de { restante2 }<br></br>
-            y para el corte 3 es de { restante3 }
+            Tu nota restante para el corte 2 es de { parseInt(restante2) }<br></br>
+            y para el corte 3 es de { parseInt(restante3) }
           </Typography>
         }
         
-        { result == '2' && restante3 > 9.6 &&
+        { result == '2' && restante3 < 9.6 &&
           <Typography>
-            Tu nota restante para el tercer corte es de { restante3 } <br></br>
+            Tu nota restante para el tercer corte es de { parseInt(restante3 / 0.4) } <br></br>
           </Typography>
         }
 
-        { result == '2' && restante3 < 9.6 && 
+        { result == '2' && restante3 > 9.6 && 
           <Typography>
-            Tu nota restante para el tercer corte es de { 9.6 - restante3 } <br></br>
+            Tu nota restante para el tercer corte es de { parseInt(restante3 / 0.4) } <br></br>
             ya has acumulado nota suficiente para aprobar
           </Typography>
         }
 
         { result == '3' && notaFinal > 9.6 && 
           <Typography>
-            Felicitaciones, aprobaste la materia con una nota final de { notaFinal }
+            Felicitaciones, aprobaste la materia con una nota final de { parseInt(notaFinal) }
           </Typography>
         }
 
         { result == '3' && notaFinal < 9.6 && 
           <Typography>
-            Lo sentimos, { notaFinal } no es una nota suficiente para aprobar
+            Lo sentimos, { parseInt(notaFinal) } no es una nota suficiente para aprobar
           </Typography>
         }
       </Box>
