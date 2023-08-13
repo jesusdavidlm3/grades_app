@@ -15,15 +15,16 @@ function App() {
   const [restante3, setRestante3] = useState(0)
 
   const [notaFinal, setNotaFinal] = useState(0)
-  const [aprobado, setAprobado] = useState(false)
 
   function mostrar1corte(){
     setNot1(0)
     setNot2(0)
     setNot3(0)
+    setRestante2(0)
+    setRestante3(0)
+    setNotaFinal(0)
     setCorte('1')
     setResult('')
-    setAprobado(false)
     if(corte == '1'){
       setCorte('')
     }
@@ -33,9 +34,11 @@ function App() {
     setNot1(0)
     setNot2(0)
     setNot3(0)
+    setRestante2(0)
+    setRestante3(0)
+    setNotaFinal(0)
     setCorte('2')
     setResult('')
-    setAprobado(false)
     if(corte == '2'){
       setCorte('')
     }
@@ -45,9 +48,11 @@ function App() {
     setNot1(0)
     setNot2(0)
     setNot3(0)
+    setRestante2(0)
+    setRestante3(0)
+    setNotaFinal(0)
     setCorte('3')
     setResult('')
-    setAprobado(false)
     if(corte == '3'){
       setCorte('')
     }
@@ -55,13 +60,13 @@ function App() {
 
   function calcular1(){
     setResult('1')
-    setRestante2( (9.6-(not1*0.3))/0.43 )
-    setRestante3( (9.6-(not1*0.3))/0.57 )
+    setRestante2( (9.6 - not1 * 0.3) / 0.3 )
   }
 
   function calcular2(){
     setResult('2')
-    setRestante3( (9.6 - ( not1*0.3 + not2*0.3)) )
+    setRestante3( (9.6 - ( not1*0.3 + not2*0.3 )) / 0.4 )
+    setNotaFinal( not1*0.3 + not2*0.3 )
   }
 
   function calcular3(){
@@ -208,37 +213,41 @@ function App() {
               Calcular
             </Button>
 
-            <Typography>
-            Tu nota en el primer corte es {not1}<br></br>
-            Tu nota en el Segundo corte es {not2}<br></br>
-            Tu nota en el tercer corte es {not3}<br></br>
-            </Typography>
           </form>
         }
       </Box>
 
       <Box textAlign={ 'center' } >
-        { result == '1' && 
+        { result == '1' && restante2 > 20 &&
           <Typography>
-            Tu nota restante para el corte 2 es de { restante2.toFixed(2) }<br></br>
-            y para el corte 3 es de { restante3.toFixed(2) }
+            Si tu nota en el primer corte fue de { not1.toFixed(2) }<br></br>
+            no hay forma en que puedas aprobar con solo dos cortes
           </Typography>
         }
         
-        { result == '2' && restante3 < 9.6 &&
+        { result == '1' && restante2 <= 20 &&
           <Typography>
-            Tu nota restante para el tercer corte es de { parseInt(restante3 / 0.4) } <br></br>
+            Si tu nota en el primer corte fue de { not1.toFixed(2) }<br></br>
+            Necesitaras una nota de al menos { restante2.toFixed(2) }
+          </Typography>
+        }
+        
+        { result == '2' && notaFinal < 9.6 &&
+          <Typography>
+            Su nota acumulada con dos cortes es de { notaFinal.toFixed(2) } puntos<br></br>
+            Necesitas por lo menos { (9.6 - notaFinal).toFixed(2) } puntos en tu nota definitiva para aprobar<br></br>
+            Necesitas por lo menos { restante3.toFixed(2) } en el tercer corte para aprobar
           </Typography>
         }
 
-        { result == '2' && restante3 > 9.6 && 
+        { result == '2' && notaFinal >= 9.6 &&
           <Typography>
-            Tu nota restante para el tercer corte es de { parseInt(restante3 / 0.4) } <br></br>
-            ya has acumulado nota suficiente para aprobar
+            Su nota acumulada con dos cortes es de { notaFinal.toFixed(2) } puntos<br></br>
+            Felicidades, ya has aprobado
           </Typography>
         }
 
-        { result == '3' && notaFinal > 9.6 && 
+        { result == '3' && notaFinal >= 9.6 && 
           <Typography>
             Felicitaciones, aprobaste la materia con una nota final de { notaFinal.toFixed(2) }
           </Typography>
