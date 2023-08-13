@@ -220,8 +220,8 @@ function App() {
       <Box textAlign={ 'center' } >
         { result == '1' && 
           <Typography>
-            Tu nota restante para el corte 2 es de { parseInt(restante2) }<br></br>
-            y para el corte 3 es de { parseInt(restante3) }
+            Tu nota restante para el corte 2 es de { restante2.toFixed(2) }<br></br>
+            y para el corte 3 es de { restante3.toFixed(2) }
           </Typography>
         }
         
@@ -240,13 +240,13 @@ function App() {
 
         { result == '3' && notaFinal > 9.6 && 
           <Typography>
-            Felicitaciones, aprobaste la materia con una nota final de { parseInt(notaFinal) }
+            Felicitaciones, aprobaste la materia con una nota final de { notaFinal.toFixed(2) }
           </Typography>
         }
 
         { result == '3' && notaFinal < 9.6 && 
           <Typography>
-            Lo sentimos, { parseInt(notaFinal) } no es una nota suficiente para aprobar
+            Lo sentimos, { notaFinal.toFixed(2) } no es una nota suficiente para aprobar
           </Typography>
         }
       </Box>
